@@ -1,0 +1,49 @@
+15.11.2024
+Breaking News
+John Doe
+This is the content of the news.
+
+17.11.2024
+Breaking News
+Jane Smith
+Important developments regarding the situation.
+
+14.11.2024
+Breaking News
+Alice Brown
+Breaking update on the ongoing event.
+
+11.11.2024
+Breaking News
+Bob White
+New information has surfaced about the incident.
+
+13.11.2024
+Breaking News
+Charlie Green
+An exclusive report on the current crisis.
+
+15.11.2024
+Breaking News
+John Doe
+This is the content of the news.
+
+07.11.2024
+Breaking News
+Jane Smith
+Important developments regarding the situation.
+
+09.11.2024
+Breaking News
+Alice Brown
+Breaking update on the ongoing event.
+
+01.11.2024
+Breaking News
+Bob White
+New information has surfaced about the incident.
+
+03.11.2024
+Breaking News
+Charlie Green
+An exclusive report on the current crisis.
