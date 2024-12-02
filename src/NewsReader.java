@@ -15,10 +15,29 @@ public class NewsReader {
                 String author = br.readLine().trim();
                 String content = br.readLine().trim();
 
-                if(date.equals(dateRequest)) {
+                if (date.equals(dateRequest)) {
                     News news = new News(date, title, author, content);
                     newsList.add(news);
                 }
+                br.readLine();
+            }
+        }
+        return   newsList;
+    }
+
+    public static List<News> readAllNewsFromFile(String filePath) throws IOException {
+        List<News> newsList = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String date = line.trim();
+                String title = br.readLine().trim();
+                String author = br.readLine().trim();
+                String content = br.readLine().trim();
+
+                News news = new News(date, title, author, content);
+                newsList.add(news);
+
                 br.readLine();
             }
         }

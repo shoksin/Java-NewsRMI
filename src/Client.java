@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,13 +25,15 @@ public class Client {
     public void run() {
         while (true) {
             try {
-                System.out.println("Enter command:\n1. add_news\n2. quit\n3. <date (dd.mm.yyyy)>");
+                System.out.println("Enter command:\n1.add_news - add news\n2.clear_old_news - clear old news\n3.(dd.mm.yyyy) - get news for this date\n4.quit");
                 String command = reader.readLine();
 
                 if (command.equals("add_news")) {
                     addNews();
                 } else if (command.equals("quit")) {
                     break;
+                } else if (command.equals("clear_old_news")) {
+                    clearOldNews();
                 } else {
                     getNews(command);
                 }
@@ -85,6 +88,22 @@ public class Client {
             System.out.printf("No news found for date:%s\n", date);
         }
     }
+
+    private void clearOldNews() throws Exception {
+        System.out.println("Enter admin password:");
+        String pass = reader.readLine();
+        if (handler.isAdmin(pass)) {
+            try {
+                handler.clearOldNews(pass);
+                System.out.println("Old news cleared successfully.");
+            } catch (RemoteException e) {
+                System.out.println("Failed to clear old news: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Invalid password.");
+        }
+    }
+
 
     public static void main(String[] args) {
         Client client = new Client();

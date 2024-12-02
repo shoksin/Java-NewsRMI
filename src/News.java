@@ -1,10 +1,13 @@
 import java.io.Serializable;
+import java.time.format.DateTimeFormatter;
 
 public class News implements Serializable {
     private String date;
     private String title;
     private String author;
     private String content;
+
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     public News(String date, String title, String author, String content) {
         this.date = date;

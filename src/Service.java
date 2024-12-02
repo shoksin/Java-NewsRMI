@@ -1,6 +1,7 @@
 import java.io.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,4 +47,37 @@ public class Service extends UnicastRemoteObject implements Handler{
     public boolean isAdmin(String pass){
         return password.equals(pass);
     }
+
+    @Override
+    public void clearOldNews(String adminPassword) throws RemoteException {
+        try {
+            LocalDate oneMonthAgo = LocalDate.now().minusMonths(1);
+            List<News> updatedNewsList = new ArrayList<>();
+
+            newsList = NewsReader.readAllNewsFromFile("./news.txt");
+
+            for (News news : newsList) {
+                LocalDate newsDate = LocalDate.parse(news.getDate(), News.DATE_FORMATTER);
+                if (!newsDate.isBefore(oneMonthAgo)) {
+                    updatedNewsList.add(news);
+                }
+            }
+
+            newsList = updatedNewsList;
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("./news.txt"))) {
+            for (int i = 0; i < newsList.size(); i++) {
+                writer.write(newsList.get(i).toString2());
+                if (i < newsList.size() - 1) {
+                    writer.newLine();
+                }
+            }
+        } catch (IOException e) {
+            throw new RemoteException("Failed to update news file: " + e.getMessage());
+        }
+    }
+
 }
